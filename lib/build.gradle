@@ -1,0 +1,50 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 27
+
+    defaultConfig {
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "0.1.0"
+
+        ndk {
+            abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
+        }
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17 -Wall -frtti -fexceptions"
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.aar'])
+}
+
+clean {
+    delete '.externalNativeBuild'
+}
+
+project.ext {
+    extractNativeRunBefore = [ 'externalNativeBuild${buildType}' ]
+    extractNativeRunAfter = null
+    extractNativeMap = [ "Elastos.SDK.Wallet.C" : "$projectDir/libs/Elastos.SDK.Wallet.C.aar" ]
+}
+apply from: "$projectDir/task-extract-native.gradle"
+
