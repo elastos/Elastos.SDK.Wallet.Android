@@ -1,7 +1,15 @@
 #include <jni.h>
 #include <string>
 
+#include <BlockChainNode.h>
+#include <DidManager.h>
+#include <Identity.h>
+#include <MultiSignWallet.h>
+#include <WalletError.h>
 #include <Did.h>
+#include <HDWallet.h>
+#include <IdentityManager.h>
+#include <Transaction.h>
 
 #include "JniUtils.hpp"
 
