@@ -3,7 +3,7 @@ package org.elastos.sdk.wallet;
 public final class Did extends WalletBase {
 
 
-    Did(int obj) {
+    Did(long obj) {
         mObj = obj;
     }
 
@@ -42,10 +42,10 @@ public final class Did extends WalletBase {
 
 
     public static native void test();
-    private static native String native_getId(int obj);
-    private static native String native_signInfo(int obj, String seed, String json);
-    private static native String native_setInfo(int obj, String seed, String json, int wallet);
-    private static native int native_syncInfo(int obj);
-    private static native String native_getInfo(int obj, String key);
-    private static native void native_destroyDid(int obj);
+    private static native String native_getId(long obj);
+    private static native String native_signInfo(long obj, String seed, String json);
+    private static native String native_setInfo(long obj, String seed, String json, long wallet);
+    private static native int native_syncInfo(long obj);
+    private static native String native_getInfo(long obj, String key);
+    private static native void native_destroyDid(long obj);
 }

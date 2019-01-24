@@ -19,9 +19,6 @@ public final class BlockChainNode extends WalletBase {
         native_setCertificate(mObj, cert);
     }
 
-    int getObject() {
-        return mObj;
-    }
 
     @Override
     protected synchronized void destroy() {
@@ -32,9 +29,9 @@ public final class BlockChainNode extends WalletBase {
     }
 
 
-    private static native int native_newBlockNode(String url);
-    private static native void native_setUrl(int obj, String url);
-    private static native String native_getUrl(int obj);
-    private static native void native_setCertificate(int obj, String cert);
-    private static native void native_destroyNode(int obj);
+    private static native long native_newBlockNode(String url);
+    private static native void native_setUrl(long obj, String url);
+    private static native String native_getUrl(long obj);
+    private static native void native_setCertificate(long obj, String cert);
+    private static native void native_destroyNode(long obj);
 }

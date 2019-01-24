@@ -5,11 +5,16 @@ import java.io.IOException;
 
 class WalletBase implements Closeable {
 
-    int mObj = 0;
+    long mObj = 0;
 
     @Override
     public void close() throws IOException {
         destroy();
+    }
+
+
+    long getObject() {
+        return mObj;
     }
 
     @Override

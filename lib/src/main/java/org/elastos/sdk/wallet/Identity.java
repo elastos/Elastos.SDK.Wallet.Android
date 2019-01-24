@@ -2,23 +2,23 @@ package org.elastos.sdk.wallet;
 
 public final class Identity extends WalletBase {
 
-    Identity(int obj) {
+    Identity(long obj) {
         mObj = obj;
     }
 
     public HDWallet createSingleAddressWallet(String seed, BlockChainNode node) {
-        int obj = native_createSingleAddressWallet(mObj, seed, node.getObject());
+        long obj = native_createSingleAddressWallet(mObj, seed, node.getObject());
         return new HDWallet(obj);
     }
 
     public HDWallet createWallet(String seed, int coinType, BlockChainNode node) {
-        int obj = native_createWallet(mObj, seed, coinType, node.getObject());
+        long obj = native_createWallet(mObj, seed, coinType, node.getObject());
         return new HDWallet(obj);
     }
 
 
     public DidManager createDidManager(String seed) {
-        int obj = native_createDidManager(mObj, seed);
+        long obj = native_createDidManager(mObj, seed);
         return new DidManager(obj);
     }
 
@@ -31,8 +31,8 @@ public final class Identity extends WalletBase {
     }
 
 
-    private static native int native_createSingleAddressWallet(int obj, String seed, int node);
-    private static native int native_createWallet(int obj, String seed, int coinType, int node);
-    private static native int native_createDidManager(int obj, String seed);
-    private static native void native_destroyIdentity(int obj);
+    private static native long native_createSingleAddressWallet(long obj, String seed, long node);
+    private static native long native_createWallet(long obj, String seed, int coinType, long node);
+    private static native long native_createDidManager(long obj, String seed);
+    private static native void native_destroyIdentity(long obj);
 }

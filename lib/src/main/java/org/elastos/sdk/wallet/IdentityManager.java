@@ -24,13 +24,13 @@ public final class IdentityManager {
 
     static Identity createIdentity(String localPath)
     {
-        int obj = native_createIdentity(localPath);
+        long obj = native_createIdentity(localPath);
         return new Identity(obj);
     }
 
 
     private static native String native_getMnemonic(String language, String words);
-    private static native String native_getSeed(String mnemonic, String lanaguage, String words, String mnemonicPassword);
-    private static native int native_createIdentity(String localPath);
+    private static native String native_getSeed(String mnemonic, String language, String words, String mnemonicPassword);
+    private static native long native_createIdentity(String localPath);
 
 }

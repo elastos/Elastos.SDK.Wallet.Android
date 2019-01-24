@@ -2,7 +2,7 @@ package org.elastos.sdk.wallet;
 
 public final class HDWallet extends WalletBase {
 
-    HDWallet(int obj) {
+    HDWallet(long obj) {
         mObj = obj;
     }
 
@@ -11,7 +11,7 @@ public final class HDWallet extends WalletBase {
     }
 
     String sendTransaction(Transaction[] transactions, String memo, String seed, String chain) {
-        int txObjs[] = new int[](transactions.length);
+        long txObjs[] = new long[transactions.length];
         for (int i = 0; i < transactions.length; i++) {
             txObjs[i] = transactions[i].getObject();
         }
@@ -31,7 +31,7 @@ public final class HDWallet extends WalletBase {
     }
 
     long getBalance() {
-        return native_getBalance(mObj);
+        return native_getBalanceEx(mObj);
     }
 
     int syncHistory() {
@@ -42,16 +42,20 @@ public final class HDWallet extends WalletBase {
         return native_getHistoryCount(mObj, address);
     }
 
-    int GetHistory(const std::string& address, int pageSize, int page, bool ascending, std::string& histories);
+    String getHistory(String address, int pageSize, int page, boolean ascending) {
+        return native_getHistory(mObj, address, pageSize, page, ascending);
+    }
 
-    std::vector<std::string> GetUsedAddresses();
+    String[] getUsedAddresses() {
+        return native_getUsedAddresses(mObj);
+    }
 
-    std::vector<std::string> GetUnUsedAddresses(unsigned int count);
+    String[] getUnUsedAddresses(int count) {
+        return native_getUnUsedAddressed(mObj, count);
+    }
 
-    int Recover();
-
-    int getObject() {
-        return mObj;
+    int recover() {
+        return native_recover(mObj);
     }
 
     @Override
@@ -63,18 +67,18 @@ public final class HDWallet extends WalletBase {
     }
 
 
-    private static native int native_getCoinType(int obj);
-    private static native String native_sendTransaction(int obj, int[] transactions, String memo,
+    private static native int native_getCoinType(long obj);
+    private static native String native_sendTransaction(long obj, long[] transactions, String memo,
                                                      String seed, String chain);
-    private static native String native_getAddress(int obj, int chain, int index);
-    private static native String native_getPublickey(int obj, int chain, int index);
-    private static native long native_getBalance(int obj, String address);
-    private static native long native_getBalance(int obj);
-    private static native int native_syncHistory(int obj);
-    private static native int native_getHistoryCount(int obj, String address);
-    private static native String native_getHistory(int obj);
-    private static native String[] native_getUsedAddresses(int obj);
-    private static native String[] native_getUnUsedAddressed(int obj, int count);
-    private static native int native_recover(int obj);
-    private static native void native_destroyHDWallet(int obj);
+    private static native String native_getAddress(long obj, int chain, int index);
+    private static native String native_getPublickey(long obj, int chain, int index);
+    private static native long native_getBalance(long obj, String address);
+    private static native long native_getBalanceEx(long obj);
+    private static native int native_syncHistory(long obj);
+    private static native int native_getHistoryCount(long obj, String address);
+    private static native String native_getHistory(long obj, String address, int pageSize, int page, boolean ascending);
+    private static native String[] native_getUsedAddresses(long obj);
+    private static native String[] native_getUnUsedAddressed(long obj, int count);
+    private static native int native_recover(long obj);
+    private static native void native_destroyHDWallet(long obj);
 }
