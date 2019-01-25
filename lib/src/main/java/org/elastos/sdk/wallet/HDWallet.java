@@ -6,11 +6,11 @@ public final class HDWallet extends WalletBase {
         mObj = obj;
     }
 
-    int getCoinType() {
+    public int getCoinType() {
         return native_getCoinType(mObj);
     }
 
-    String sendTransaction(Transaction[] transactions, String memo, String seed, String chain) {
+    public String sendTransaction(Transaction[] transactions, String memo, String seed, String chain) {
         long txObjs[] = new long[transactions.length];
         for (int i = 0; i < transactions.length; i++) {
             txObjs[i] = transactions[i].getObject();
@@ -18,43 +18,43 @@ public final class HDWallet extends WalletBase {
         return native_sendTransaction(mObj, txObjs, memo, seed, chain);
     }
 
-    String getAddress(int chain, int index) {
+    public String getAddress(int chain, int index) {
         return native_getAddress(mObj, chain, index);
     }
 
-    String getPublicKey(int chain, int index) {
+    public String getPublicKey(int chain, int index) {
         return native_getPublickey(mObj, chain, index);
     }
 
-    long getBalance(String address) {
+    public long getBalance(String address) {
         return native_getBalance(mObj, address);
     }
 
-    long getBalance() {
+    public long getBalance() {
         return native_getBalanceEx(mObj);
     }
 
-    int syncHistory() {
+    public int syncHistory() {
         return native_syncHistory(mObj);
     }
 
-    int getHistoryCount(String address) {
+    public int getHistoryCount(String address) {
         return native_getHistoryCount(mObj, address);
     }
 
-    String getHistory(String address, int pageSize, int page, boolean ascending) {
+    public  String getHistory(String address, int pageSize, int page, boolean ascending) {
         return native_getHistory(mObj, address, pageSize, page, ascending);
     }
 
-    String[] getUsedAddresses() {
+    public String[] getUsedAddresses() {
         return native_getUsedAddresses(mObj);
     }
 
-    String[] getUnUsedAddresses(int count) {
-        return native_getUnUsedAddressed(mObj, count);
+    public String[] getUnUsedAddresses(int count) {
+        return native_getUnUsedAddresses(mObj, count);
     }
 
-    int recover() {
+    public int recover() {
         return native_recover(mObj);
     }
 
@@ -78,7 +78,7 @@ public final class HDWallet extends WalletBase {
     private static native int native_getHistoryCount(long obj, String address);
     private static native String native_getHistory(long obj, String address, int pageSize, int page, boolean ascending);
     private static native String[] native_getUsedAddresses(long obj);
-    private static native String[] native_getUnUsedAddressed(long obj, int count);
+    private static native String[] native_getUnUsedAddresses(long obj, int count);
     private static native int native_recover(long obj);
     private static native void native_destroyHDWallet(long obj);
 }

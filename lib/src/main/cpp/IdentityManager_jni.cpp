@@ -2,6 +2,7 @@
 #include <string>
 #include "IdentityManager.h"
 #include "WalletError.h"
+#include "Log.hpp"
 
 using namespace elastos;
 

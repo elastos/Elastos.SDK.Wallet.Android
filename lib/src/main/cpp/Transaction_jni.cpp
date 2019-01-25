@@ -63,7 +63,7 @@ static const JNINativeMethod gMethods[] = {
         {"native_getCoinTypeTx", "(J)I", (void*)native_getCoinTypeTx},
         {"native_getAddress", "(J)Ljava/lang/String;", (void*)native_getAddress},
         {"native_getAmount", "(J)J", (void*)native_getAmount},
-        {"native_destroyDid", "(J)V", (void*)native_destroyTransaction},
+        {"native_destroyTransaction", "(J)V", (void*)native_destroyTransaction},
 };
 
 int registerTransactionMethod(JNIEnv * env) {

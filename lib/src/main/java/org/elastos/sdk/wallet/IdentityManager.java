@@ -1,6 +1,11 @@
 package org.elastos.sdk.wallet;
 
 public final class IdentityManager {
+
+    static {
+        System.loadLibrary("Elastos.SDK.Wallet");
+    }
+
     private IdentityManager(){};
 
 

@@ -7,8 +7,8 @@ public final class DidManager extends WalletBase {
         mObj = obj;
     }
 
-    Did createDid(int index) {
-        int obj = native_createDid(mObj, index);
+    public Did createDid(int index) {
+        long obj = native_createDid(mObj, index);
         return new Did(mObj);
     }
 
@@ -21,6 +21,6 @@ public final class DidManager extends WalletBase {
     }
 
 
-    private static native int native_createDid(long obj, int index);
+    private static native long native_createDid(long obj, int index);
     private static native void native_destroyDidManager(long obj);
 }

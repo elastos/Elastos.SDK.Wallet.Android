@@ -17,6 +17,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Test\nMnemonic"/>
+            <Button android:id="@+id/btn_test_singlewallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="test Single"/>
             <Button android:id="@+id/btn_test_hdwallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

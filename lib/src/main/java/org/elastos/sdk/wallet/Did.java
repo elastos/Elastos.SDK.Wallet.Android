@@ -7,10 +7,6 @@ public final class Did extends WalletBase {
         mObj = obj;
     }
 
-    static {
-        System.loadLibrary("Elastos.SDK.Wallet");
-    }
-
 
     public String getId() {
         return native_getId(mObj);
@@ -20,15 +16,15 @@ public final class Did extends WalletBase {
         return native_signInfo(mObj, seed, json);
     }
 
-    String setInfo(String seed, String json, HDWallet wallet) {
+    public String setInfo(String seed, String json, HDWallet wallet) {
         return native_setInfo(mObj, seed, json, wallet.getObject());
     }
 
-    int syncInfo() {
+    public int syncInfo() {
         return native_syncInfo(mObj);
     }
 
-    String getInfo(String key) {
+    public String getInfo(String key) {
         return native_getInfo(mObj, key);
     }
 

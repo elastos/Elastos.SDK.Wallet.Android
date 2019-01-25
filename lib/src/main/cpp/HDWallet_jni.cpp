@@ -122,7 +122,7 @@ JNICALL jobjectArray native_getUsedAddresses(JNIEnv* env, jobject jobj, jlong ob
     return array;
 }
 
-JNICALL jobjectArray native_getUnUsedAddressed(JNIEnv* env, jobject jobj, jlong obj, jint count) {
+JNICALL jobjectArray native_getUnUsedAddresses(JNIEnv* env, jobject jobj, jlong obj, jint count) {
     if (!obj) return nullptr;
     std::shared_ptr<HDWallet>* wallet = (std::shared_ptr<HDWallet>*)obj;
 
@@ -162,7 +162,7 @@ static const JNINativeMethod gMethods[] = {
         {"native_getHistoryCount", "(JLjava/lang/String;)I", (void*)native_getHistoryCount},
         {"native_getHistory", "(JLjava/lang/String;IIZ)Ljava/lang/String;", (void*)native_getHistory},
         {"native_getUsedAddresses", "(J)[Ljava/lang/String;", (void*)native_getUsedAddresses},
-        {"native_getUnUsedAddressed", "(J)[Ljava/lang/String;", (void*)native_getUnUsedAddressed},
+        {"native_getUnUsedAddresses", "(JI)[Ljava/lang/String;", (void*)native_getUnUsedAddresses},
         {"native_recover", "(J)I", (void*)native_recover},
         {"native_destroyHDWallet", "(J)V", (void*)native_destroyHDWallet},
 };

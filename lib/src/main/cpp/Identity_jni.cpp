@@ -18,6 +18,10 @@ JNICALL jlong native_createSingleAddressWallet(JNIEnv* env, jobject jobj, jlong 
     const char* seedStr = env->GetStringUTFChars(seed, nullptr);
     int ret = (*identity)->CreateSingleAddressWallet(seedStr, *pNode, wallet);
     env->ReleaseStringUTFChars(seed, seedStr);
+    if (ret != E_WALLET_C_OK) {
+        delete wallet;
+        return 0;
+    }
 
     return (jlong)wallet;
 }
@@ -36,7 +40,7 @@ JNICALL jlong native_createWallet(JNIEnv* env, jobject jobj, jlong obj, jstring 
     int ret = (*identity)->CreateWallet(seedStr, coinType, *pNode, wallet);
     env->ReleaseStringUTFChars(seed, seedStr);
     if (ret != E_WALLET_C_OK) {
-        delete pNode;
+        delete wallet;
         return 0;
     }
 

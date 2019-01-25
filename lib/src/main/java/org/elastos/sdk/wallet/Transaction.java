@@ -3,27 +3,27 @@ package org.elastos.sdk.wallet;
 
 public final class Transaction extends WalletBase {
 
-    Transaction(String address, long amount, int coinType) {
+    public Transaction(String address, long amount, int coinType) {
         mObj = native_createTransaction(address, amount, coinType);
     }
 
-    void setAddress(String address, int coinType) {
+    public void setAddress(String address, int coinType) {
         native_setAddress(mObj, address, coinType);
     }
 
-    void setAmount(long amount) {
+    public void setAmount(long amount) {
         native_setAmount(mObj, amount);
     }
 
-    int getCoinType() {
+    public int getCoinType() {
         return native_getCoinTypeTx(mObj);
     }
 
-    String getAddress() {
+    public String getAddress() {
         return native_getAddress(mObj);
     }
 
-    long getAmount() {
+    public long getAmount() {
         return native_getAmount(mObj);
     }
 
