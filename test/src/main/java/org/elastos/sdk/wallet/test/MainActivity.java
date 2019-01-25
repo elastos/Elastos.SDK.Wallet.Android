@@ -5,6 +5,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
+import org.elastos.sdk.wallet.IdentityManager;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+
+import static org.elastos.sdk.wallet.IdentityManager.getMnemonic;
+
 public class MainActivity extends Activity {
     private static final String TAG = "MainActivity";
 
@@ -40,10 +50,25 @@ public class MainActivity extends Activity {
     }
 
     private String testGenrateMnemonic() {
-        String message = "";
+        StringBuilder buf = new StringBuilder();
+        InputStream file = null;
+        try {
+            file = getAssets().open("mnemonic_chinese.txt");
+            BufferedReader in = new BufferedReader(new InputStreamReader(file, "UTF-8"));
 
-        message += "================================================\n";
-        return message;
+            String str;
+
+            while ((str = in.readLine()) != null) {
+                buf.append(str);
+            }
+
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        return IdentityManager.getMnemonic("chinese", buf.toString());
     }
 
     private String testHDWalletAddress() {
