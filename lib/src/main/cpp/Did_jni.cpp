@@ -26,7 +26,7 @@ JNICALL jstring native_signInfo(JNIEnv* env, jobject jobj, jlong obj, jstring se
 
     const char* seedStr = env->GetStringUTFChars(seed, nullptr);
     const char* jsonStr = env->GetStringUTFChars(json, nullptr);
-    std::string signedInfo = (*did)->SignInfo(seedStr, std::string(jsonStr));
+    std::string signedInfo = (*did)->SignInfo(seedStr, jsonStr);
     env->ReleaseStringUTFChars(seed, seedStr);
     env->ReleaseStringUTFChars(json, jsonStr);
 

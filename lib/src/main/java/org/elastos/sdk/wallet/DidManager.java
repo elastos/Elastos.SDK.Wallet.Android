@@ -9,7 +9,7 @@ public final class DidManager extends WalletBase {
 
     public Did createDid(int index) {
         long obj = native_createDid(mObj, index);
-        return new Did(mObj);
+        return new Did(obj);
     }
 
     @Override

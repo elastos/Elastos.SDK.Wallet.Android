@@ -2,10 +2,11 @@
 #include <memory>
 #include "Identity.h"
 #include "WalletError.h"
+#include "Log.hpp"
 
 using namespace elastos;
 
-JNICALL jlong native_createSingleAddressWallet(JNIEnv* env, jobject jobj, jlong obj, jstring seed, long node) {
+JNICALL jlong native_createSingleAddressWallet(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jlong node) {
     if (!obj) return 0;
 
     std::shared_ptr<Identity>* identity = (std::shared_ptr<Identity>*)obj;
@@ -26,7 +27,7 @@ JNICALL jlong native_createSingleAddressWallet(JNIEnv* env, jobject jobj, jlong 
     return (jlong)wallet;
 }
 
-JNICALL jlong native_createWallet(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jint coinType, long node) {
+JNICALL jlong native_createWallet(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jint coinType, jlong node) {
     if (!obj) return 0;
 
     std::shared_ptr<Identity>* identity = (std::shared_ptr<Identity>*)obj;

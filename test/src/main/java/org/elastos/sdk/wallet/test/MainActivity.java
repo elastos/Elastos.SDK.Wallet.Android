@@ -149,7 +149,9 @@ public class MainActivity extends Activity {
         BlockChainNode node = new BlockChainNode("https://api-wallet-did-testnet.elastos.org");
         HDWallet singleWallet = identity.createSingleAddressWallet(seed, node);
 
-        long balance = singleWallet.getBalance("EdVgb5RTdmwKf79pEUdVNnFprWyvmr1hPc");
+        singleWallet.syncHistory();
+
+        long balance = singleWallet.getBalance();
         Log.d("Test", "balance: " + balance);
 
         DidManager manager = identity.createDidManager(seed);

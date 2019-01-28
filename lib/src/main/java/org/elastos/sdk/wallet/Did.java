@@ -36,8 +36,6 @@ public final class Did extends WalletBase {
         }
     }
 
-
-    public static native void test();
     private static native String native_getId(long obj);
     private static native String native_signInfo(long obj, String seed, String json);
     private static native String native_setInfo(long obj, String seed, String json, long wallet);
