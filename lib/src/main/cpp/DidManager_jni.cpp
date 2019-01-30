@@ -19,6 +19,13 @@ JNICALL jlong native_createDid(JNIEnv* env, jobject jobj, jlong obj, jint index)
     return (jlong)did;
 }
 
+JNICALL jint native_didRecover(JNIEnv* env, jobject jobj, jlong obj) {
+    if (!obj) return 0;
+
+    std::shared_ptr<DidManager>* manager = (std::shared_ptr<DidManager>*)obj;
+    return (*manager)->Recover();
+}
+
 JNICALL void native_destroyDidManager(JNIEnv* env, jobject jobj, jlong obj) {
     if (!obj) return;
 
@@ -27,8 +34,10 @@ JNICALL void native_destroyDidManager(JNIEnv* env, jobject jobj, jlong obj) {
     delete manager;
 }
 
+
 static const JNINativeMethod gMethods[] = {
         {"native_createDid", "(JI)J", (void*)native_createDid},
+        {"native_didRecover", "(J)J", (void*)native_didRecover},
         {"native_destroyDidManager", "(J)V", (void*)native_destroyDidManager},
 };
 

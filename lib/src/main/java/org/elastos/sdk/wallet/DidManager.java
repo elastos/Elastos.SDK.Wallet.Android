@@ -12,6 +12,10 @@ public final class DidManager extends WalletBase {
         return new Did(obj);
     }
 
+    public int recover() {
+        return native_didRecover(mObj);
+    }
+
     @Override
     protected synchronized void destroy() {
         if (mObj != 0) {
@@ -22,5 +26,6 @@ public final class DidManager extends WalletBase {
 
 
     private static native long native_createDid(long obj, int index);
+    private static native int native_didRecover(long obj);
     private static native void native_destroyDidManager(long obj);
 }
