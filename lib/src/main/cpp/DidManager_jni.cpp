@@ -37,7 +37,7 @@ JNICALL void native_destroyDidManager(JNIEnv* env, jobject jobj, jlong obj) {
 
 static const JNINativeMethod gMethods[] = {
         {"native_createDid", "(JI)J", (void*)native_createDid},
-        {"native_didRecover", "(J)J", (void*)native_didRecover},
+        {"native_didRecover", "(J)I", (void*)native_didRecover},
         {"native_destroyDidManager", "(J)V", (void*)native_destroyDidManager},
 };
 
