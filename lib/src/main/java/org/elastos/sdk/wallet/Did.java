@@ -28,6 +28,10 @@ public final class Did extends WalletBase {
         return native_getInfo(mObj, key);
     }
 
+    public void setNode(BlockChainNode node) {
+        native_setNode(mObj, node.getObject());
+    }
+
     @Override
     protected synchronized void destroy() {
         if (mObj != 0) {
@@ -41,5 +45,6 @@ public final class Did extends WalletBase {
     private static native String native_setInfo(long obj, String seed, String json, long wallet);
     private static native int native_syncInfo(long obj);
     private static native String native_getInfo(long obj, String key);
+    private static native void native_setNode(long obj, long node);
     private static native void native_destroyDid(long obj);
 }

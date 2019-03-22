@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
     }
 
     @Override
@@ -157,6 +158,8 @@ public class MainActivity extends Activity {
         DidManager manager = identity.createDidManager(seed);
 
         Did did = manager.createDid(0);
+
+        did.setNode(node);
 
         String json = "[{\"Key\": \"name\", \"Value\":\"bob\"}]";
         String info = did.signInfo(seed, json);

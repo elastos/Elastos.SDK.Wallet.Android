@@ -68,6 +68,14 @@ JNICALL jstring native_getInfo(JNIEnv* env, jobject jobj, jlong obj, jstring key
     return env->NewStringUTF(value.c_str());
 }
 
+JNICALL void native_setNode(JNIEnv* env, jobject jobj, jlong obj, jlong node) {
+    if (!obj || !node) return;
+
+    std::shared_ptr<Did>* did = (std::shared_ptr<Did>*)obj;
+    std::shared_ptr<BlockChainNode>* pNode = (std::shared_ptr<BlockChainNode>*)node;
+    (*did)->SetNode(*pNode);
+}
+
 JNICALL void native_destroyDid(JNIEnv* env, jobject jobj, jlong obj) {
     if (!obj) return;
 
@@ -82,6 +90,7 @@ static const JNINativeMethod gMethods[] = {
         {"native_setInfo", "(JLjava/lang/String;Ljava/lang/String;J)Ljava/lang/String;", (void*)native_setInfo},
         {"native_syncInfo", "(J)I", (void*)native_syncInfo},
         {"native_getInfo", "(JLjava/lang/String;)Ljava/lang/String;", (void*)native_getInfo},
+        {"native_setNode", "(JJ)V", (void*)native_setNode},
         {"native_destroyDid", "(J)V", (void*)native_destroyDid},
 };
 
