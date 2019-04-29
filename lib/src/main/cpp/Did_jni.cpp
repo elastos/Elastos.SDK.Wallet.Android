@@ -19,21 +19,21 @@ JNICALL jstring native_getId(JNIEnv* env, jobject jobj, jlong obj) {
     return env->NewStringUTF(id.c_str());
 }
 
-JNICALL jstring native_signInfo(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jstring json) {
+JNICALL jstring native_signInfo(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jstring json, jboolean encypt) {
     if (!obj) return env->NewStringUTF("");
 
     std::shared_ptr<Did>* did = (std::shared_ptr<Did>*)obj;
 
     const char* seedStr = env->GetStringUTFChars(seed, nullptr);
     const char* jsonStr = env->GetStringUTFChars(json, nullptr);
-    std::string signedInfo = (*did)->SignInfo(seedStr, jsonStr);
+    std::string signedInfo = (*did)->SignInfo(seedStr, jsonStr, encypt);
     env->ReleaseStringUTFChars(seed, seedStr);
     env->ReleaseStringUTFChars(json, jsonStr);
 
     return env->NewStringUTF(signedInfo.c_str());
 }
 
-JNICALL jstring native_setInfo(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jstring json, jlong wallet) {
+JNICALL jstring native_setInfo(JNIEnv* env, jobject jobj, jlong obj, jstring seed, jstring json, jlong wallet, jboolean encypt) {
     if (!obj || !wallet) return env->NewStringUTF("");
 
     std::shared_ptr<Did>* did = (std::shared_ptr<Did>*)obj;
@@ -42,7 +42,7 @@ JNICALL jstring native_setInfo(JNIEnv* env, jobject jobj, jlong obj, jstring see
 
     const char* seedStr = env->GetStringUTFChars(seed, nullptr);
     const char* jsonStr = env->GetStringUTFChars(json, nullptr);
-    std::string txid = (*did)->SetInfo(seedStr, jsonStr, *hdWallet);
+    std::string txid = (*did)->SetInfo(seedStr, jsonStr, *hdWallet, encypt);
     env->ReleaseStringUTFChars(seed, seedStr);
     env->ReleaseStringUTFChars(json, jsonStr);
 
@@ -56,14 +56,16 @@ JNICALL jint native_syncInfo(JNIEnv* env, jobject jobj, jlong obj) {
     return (*did)->SyncInfo();;
 }
 
-JNICALL jstring native_getInfo(JNIEnv* env, jobject jobj, jlong obj, jstring key) {
+JNICALL jstring native_getInfo(JNIEnv* env, jobject jobj, jlong obj, jstring key, jboolean encypt, jstring seed) {
     if (!obj) return env->NewStringUTF("");
 
     std::shared_ptr<Did>* did = (std::shared_ptr<Did>*)obj;
 
     const char* keyStr = env->GetStringUTFChars(key, nullptr);
-    std::string value = (*did)->GetInfo(keyStr);
+    const char* seedStr = env->GetStringUTFChars(seed, nullptr);
+    std::string value = (*did)->GetInfo(keyStr, encypt, seedStr);
     env->ReleaseStringUTFChars(key, keyStr);
+    env->ReleaseStringUTFChars(seed, seedStr);
 
     return env->NewStringUTF(value.c_str());
 }
@@ -86,10 +88,10 @@ JNICALL void native_destroyDid(JNIEnv* env, jobject jobj, jlong obj) {
 
 static const JNINativeMethod gMethods[] = {
         {"native_getId", "(J)Ljava/lang/String;", (void*)native_getId},
-        {"native_signInfo", "(JLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;", (void*)native_signInfo},
-        {"native_setInfo", "(JLjava/lang/String;Ljava/lang/String;J)Ljava/lang/String;", (void*)native_setInfo},
+        {"native_signInfo", "(JLjava/lang/String;Ljava/lang/String;Z)Ljava/lang/String;", (void*)native_signInfo},
+        {"native_setInfo", "(JLjava/lang/String;Ljava/lang/String;JZ)Ljava/lang/String;", (void*)native_setInfo},
         {"native_syncInfo", "(J)I", (void*)native_syncInfo},
-        {"native_getInfo", "(JLjava/lang/String;)Ljava/lang/String;", (void*)native_getInfo},
+        {"native_getInfo", "(JLjava/lang/String;ZLjava/lang/String;)Ljava/lang/String;", (void*)native_getInfo},
         {"native_setNode", "(JJ)V", (void*)native_setNode},
         {"native_destroyDid", "(J)V", (void*)native_destroyDid},
 };

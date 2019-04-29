@@ -161,17 +161,17 @@ public class MainActivity extends Activity {
 
         did.setNode(node);
 
-        String json = "[{\"Key\": \"name\", \"Value\":\"bob\"}]";
-        String info = did.signInfo(seed, json);
+        String json = "[{\"Key\": \"Phone\", \"Value\":\"17699887989\"}]";
+        String info = did.signInfo(seed, json, true);
         Log.d("Test", "signed: " + info);
 
-        String txid = did.setInfo(seed, json, singleWallet);
+        String txid = did.setInfo(seed, json, singleWallet, true);
         Log.d("Test", "set did info: " + txid);
 
         did.syncInfo();
 
-        String value = did.getInfo("name");
-        Log.d("Test", "name: " + value);
+        String value = did.getInfo("Phone", true, seed);
+        Log.d("Test", "Phone: " + value);
 
         return "";
     }
