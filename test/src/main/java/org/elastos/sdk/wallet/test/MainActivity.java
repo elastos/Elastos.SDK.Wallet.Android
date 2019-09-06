@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
 
     private void testSingleWallet() {
         String mnemonic = "血 坝 告 售 代 讨 转 枝 欧 旦 诚 抱";
-        String seed = IdentityManager.getSeed(mnemonic, "chinese", readWords(), "");
+        String seed = IdentityManager.getSeed(mnemonic, "");
         Log.d("Test", "seed: " + seed);
 
         Identity identity = IdentityManager.createIdentity(getFilesDir().getAbsolutePath());
@@ -106,7 +106,7 @@ public class MainActivity extends Activity {
 
     private void testHDWalletAddress() {
         String mnemonic = "血 坝 告 售 代 讨 转 枝 欧 旦 诚 抱";
-        String seed = IdentityManager.getSeed(mnemonic, "chinese", readWords(), "");
+        String seed = IdentityManager.getSeed(mnemonic, "");
         Log.d("Test", "seed: " + seed);
 
         Identity identity = IdentityManager.createIdentity(getFilesDir().getAbsolutePath());
@@ -144,7 +144,7 @@ public class MainActivity extends Activity {
 
     private String testDid() {
         String mnemonic = "血 坝 告 售 代 讨 转 枝 欧 旦 诚 抱";
-        String seed = IdentityManager.getSeed(mnemonic, "chinese", readWords(), "");
+        String seed = IdentityManager.getSeed(mnemonic, "");
 
         Identity identity = IdentityManager.createIdentity(getFilesDir().getAbsolutePath());
         BlockChainNode node = new BlockChainNode("https://api-wallet-did-testnet.elastos.org");

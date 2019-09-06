@@ -22,9 +22,9 @@ public final class IdentityManager {
         return native_getMnemonic(language, words);
     }
 
-    public static String getSeed(String mnemonic, String language, String words, String mnemonicPassword)
+    public static String getSeed(String mnemonic, String mnemonicPassword)
     {
-        return native_getSeed(mnemonic, language, words, mnemonicPassword);
+        return native_getSeed(mnemonic, mnemonicPassword);
     }
 
     public static Identity createIdentity(String localPath)
@@ -35,7 +35,7 @@ public final class IdentityManager {
 
 
     private static native String native_getMnemonic(String language, String words);
-    private static native String native_getSeed(String mnemonic, String language, String words, String mnemonicPassword);
+    private static native String native_getSeed(String mnemonic, String mnemonicPassword);
     private static native long native_createIdentity(String localPath);
 
 }
